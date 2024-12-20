@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <resources>
-    <string name="back">Back</string>
-    <string name="home">首页</string>
-    <string name="settings">设置</string>
+    <string name="Home">首页</string>
+    <string name="Settings">设置</string>
+    <string name="DetailScreen">详情</string>
+    <string name="Undefined">未定义</string>
 </resources>
