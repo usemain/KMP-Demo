@@ -11,22 +11,22 @@ import org.jetbrains.compose.ui.tooling.preview.Preview
 import androidx.compose.material3.darkColorScheme
 import androidx.compose.material3.lightColorScheme
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.graphics.Color
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.demo.screens.detail.DetailScreen
-import com.demo.screens.layout.LayoutScreen
+import com.demo.common.DarkBgTheme
+import com.demo.routes.getRoutesScreen
 
-var BackgroundTheme = Color(20, 20, 23, 255)
-
-@Composable
 @Preview
+@Composable
 fun App() {
     MaterialTheme(
         colorScheme = if (isSystemInDarkTheme()) darkColorScheme().copy(
-            surface = BackgroundTheme, background = BackgroundTheme
-        ) else lightColorScheme()
+            surface = DarkBgTheme, background = DarkBgTheme, surfaceContainer = DarkBgTheme
+        ) else lightColorScheme().copy(
+            surface = lightColorScheme().background,
+            surfaceContainer = lightColorScheme().background
+        )
     ) {
         Surface(
             modifier = Modifier.fillMaxSize()
@@ -36,16 +36,16 @@ fun App() {
             NavHost(
                 navController = navCtrl,
                 startDestination = "LayoutScreen",
+                sizeTransform = null,
                 enterTransition = { slideInHorizontally(initialOffsetX = { it }) },
                 exitTransition = { slideOutHorizontally(targetOffsetX = { -it }) },
                 popEnterTransition = { slideInHorizontally(initialOffsetX = { -it }) },
                 popExitTransition = { slideOutHorizontally(targetOffsetX = { it }) },
             ) {
-                composable("LayoutScreen") {
-                    LayoutScreen(navCtrl)
-                }
-                composable("DetailScreen") {
-                    DetailScreen(navCtrl)
+                getRoutesScreen().forEach { screen ->
+                    composable(screen.route) {
+                        screen.content(navCtrl)
+                    }
                 }
             }
         }
