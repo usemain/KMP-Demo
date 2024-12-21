@@ -1,7 +1,6 @@
 package com.demo.components
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -21,8 +20,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import com.demo.extensions.back
+import com.demo.extensions.click
 import kmp_demo.composeapp.generated.resources.Res
 import kmp_demo.composeapp.generated.resources.Undefined
 import kmp_demo.composeapp.generated.resources.DetailScreen
@@ -30,8 +28,9 @@ import org.jetbrains.compose.resources.stringResource
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun AppBar(navCtrl: NavController) {
-    val title = when (navCtrl.currentBackStackEntry?.destination?.route) {
+fun AppBar() {
+//    val nav = LocalNavigator.currentOrThrow
+    val title = when ("") {
         "DetailScreen" -> stringResource(Res.string.DetailScreen)
         else -> stringResource(Res.string.Undefined)
     }
@@ -50,8 +49,8 @@ fun AppBar(navCtrl: NavController) {
             navigationIcon = {
                 Box(
                     modifier = Modifier.clip(CircleShape).size(24.dp).background(Color(0xFFEC6A5E))
-                        .clickable {
-                            navCtrl.back()
+                        .click {
+//                            nav.parent?.pop()
                         },
                 ) {
                     Icon(

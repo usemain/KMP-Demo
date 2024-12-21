@@ -43,7 +43,13 @@ kotlin {
             implementation(compose.components.uiToolingPreview)
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
-            implementation(libs.navigation.compose)
+            // voyager
+            implementation(libs.voyager.navigator)
+            implementation(libs.voyager.screenModel)
+            implementation(libs.voyager.transitions)
+            implementation(libs.voyager.koin)
+            implementation(libs.voyager.tabNavigator)
+            implementation(libs.voyager.bottomSheetNavigator)
         }
     }
 }
